@@ -16,16 +16,22 @@ function App() {
   }
   const handleSubmission = () => {
       const formData = new FormData()
-      formData.append('File', selectedFile)
+    
+      const path = selectedFile.file.name.substring(0, selectedFile.file.name.lastIndexOf('/'))
+    formData.append('parent_folders', `/abc-backend${path}/`)
+    formData.append('need_transcode', 'true')
+    formData.append('name', 'upload')
+    formData.append('shared_id', '2811270996997413898_441ff609-0a21-404d-af88-e72ccda60bcb')
+    formData.append('upload', selectedFile)
+    
       console.log(1)
       console.log(selectedFile)
       fetch(
-        'https://freeimage.host/api/1/upload?key=6d207e02198a847aa98d0a2a901485a5',
+        '<change your upload file url here>',
         {
           method: 'POST',
           headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
+            Authorization: `Bearer <change your token here>` 
           },
           body:formData,
         }
